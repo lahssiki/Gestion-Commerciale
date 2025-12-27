@@ -24,6 +24,8 @@ Le projet est conçu pour **apprentissage et portfolio**.
 - **Dashboard Admin** avec graphiques (ventes, stock faible…)
 - Authentification Admin (Filament)
 - Génération de données fake pour tests via **seeders & factories**
+![Capture d’écran 2025-12-27 185818](https://github.com/user-attachments/assets/9e7685b5-1713-4e12-b3d7-033a5c169cef)
+
 
 ---
 
