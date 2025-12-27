@@ -13,14 +13,27 @@ class ClientForm
         return $schema
             ->components([
                 TextInput::make('name')
-                    ->required(),
+                    ->label('Client Name')
+                    ->required()
+                    ->maxLength(255),
+
                 TextInput::make('phone')
-                    ->tel(),
+                    ->tel()
+                    ->label('Phone')
+                    ->required()
+                    ->maxLength(20),
+
                 TextInput::make('email')
-                    ->label('Email address')
-                    ->email(),
+                    ->label('Email')
+                    ->email()
+                    ->nullable()
+                    ->maxLength(255),
+
                 Textarea::make('address')
-                    ->columnSpanFull(),
+                    ->label('Address')
+                    ->rows(3)
+                    ->columnSpanFull()
+                    ->nullable(),
             ]);
     }
 }

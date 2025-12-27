@@ -13,34 +13,37 @@ class ProductsTable
     public static function configure(Table $table): Table
     {
         return $table
+            ->defaultSort('created_at', 'desc')
             ->columns([
                 TextColumn::make('category.name')
-                    ->numeric()
+                    ->label('Category')
                     ->sortable(),
+
                 TextColumn::make('name')
-                    ->searchable(),
+                    ->searchable()
+                    ->sortable(),
+
                 TextColumn::make('reference')
+                    ->label('SKU')
                     ->searchable(),
+
                 TextColumn::make('price')
-                    ->money()
+                    ->money('MAD')
                     ->sortable(),
-                TextColumn::make('stock')
-                    ->numeric()
+
+                TextColumn::make('stock.quantity')
+                    ->label('Stock')
+                    ->sortable()
+                    ->badge()
+                    ->color(fn ($state) => $state <= 0 ? 'danger' : 'success'),
+
+                TextColumn::make('stock.alert_threshold')
+                    ->label('Alert at')
                     ->sortable(),
-                TextColumn::make('stock_alert')
-                    ->numeric()
-                    ->sortable(),
+
                 TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
+                    ->date('d/m/Y')
                     ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-            ])
-            ->filters([
-                //
             ])
             ->recordActions([
                 EditAction::make(),
