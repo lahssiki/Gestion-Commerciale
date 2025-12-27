@@ -10,27 +10,26 @@ class ProductForm
 {
     public static function configure(Schema $schema): Schema
     {
-        return $schema
-            ->components([
-                Select::make('category_id')
-                    ->relationship('category', 'name')
-                    ->required(),
-                TextInput::make('name')
-                    ->required(),
-                TextInput::make('reference')
-                    ->required(),
-                TextInput::make('price')
-                    ->required()
-                    ->numeric()
-                    ->prefix('$'),
-                TextInput::make('stock')
-                    ->required()
-                    ->numeric()
-                    ->default(0),
-                TextInput::make('stock_alert')
-                    ->required()
-                    ->numeric()
-                    ->default(10),
-            ]);
+        return $schema->components([
+            Select::make('category_id')
+                ->relationship('category', 'name')
+                ->required()
+                ->searchable(),
+
+            TextInput::make('name')
+                ->required()
+                ->maxLength(255),
+
+            TextInput::make('reference')
+                ->label('Reference / SKU')
+                ->required()
+                ->unique(ignoreRecord: true)
+                ->maxLength(100),
+
+            TextInput::make('price')
+                ->numeric()
+                ->required()
+                ->prefix('MAD'),
+        ]);
     }
 }
